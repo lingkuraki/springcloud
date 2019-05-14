@@ -1,4 +1,4 @@
-package com.didispace.hello;
+package com.didispace;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

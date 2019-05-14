@@ -2,15 +2,24 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9d6d1a3e-1afe-41a1-aba8-d43b6facd68a" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/../ribbon-consumer/src/main/java/com/kuraki/service/HelloService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../chapter02/spring-boot-hello/src/main/java/com/didispace/controller/UserController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../chapter02/spring-boot-hello/src/main/java/com/didispace/mapper/UserMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../chapter02/spring-boot-hello/src/main/java/com/didispace/service/UserService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../chapter04/hystrix-consumer/src/main/java/com/kuraki/HystrixApplication.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../chapter04/hystrix-consumer/src/main/java/com/kuraki/bean/User.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../chapter04/hystrix-consumer/src/main/java/com/kuraki/bean/UserCommand.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../chapter04/hystrix-consumer/src/main/java/com/kuraki/bean/UserObservableCommand.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../chapter04/hystrix-consumer/src/main/java/com/kuraki/config/RestTemplateConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../chapter04/hystrix-consumer/src/main/java/com/kuraki/service/UserService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../chapter04/hystrix-consumer/src/main/resources/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../chapter02/spring-boot-hello/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../chapter02/spring-boot-hello/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../chapter02/spring-boot-hello/src/main/java/com/didispace/hello/HelloApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../chapter02/spring-boot-hello/src/main/java/com/didispace/HelloApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../chapter02/spring-boot-hello/src/main/java/com/didispace/hello/config/RocketMQHealthIndicator.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../chapter02/spring-boot-hello/src/main/java/com/didispace/config/RocketMQHealthIndicator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../chapter02/spring-boot-hello/src/main/java/com/didispace/hello/web/HelloController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../chapter02/spring-boot-hello/src/main/java/com/didispace/controller/HelloController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../chapter02/spring-boot-hello/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../../chapter02/spring-boot-hello/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../chapter02/spring-boot-hello/src/test/java/com/didispace/hello/HelloApplicationTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../chapter02/spring-boot-hello/src/test/java/com/didispace/HelloApplicationTests.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../ribbon-consumer/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../ribbon-consumer/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ribbon-consumer/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../ribbon-consumer/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ribbon-consumer/src/main/java/com/kuraki/ConsumerApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/../ribbon-consumer/src/main/java/com/kuraki/ConsumerApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ribbon-consumer/src/main/java/com/kuraki/controller/ConsumerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../ribbon-consumer/src/main/java/com/kuraki/controller/ConsumerController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ribbon-consumer/target/classes/com/kuraki/ConsumerApplication.class" beforeDir="false" afterPath="$PROJECT_DIR$/../ribbon-consumer/target/classes/com/kuraki/ConsumerApplication.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ribbon-consumer/target/classes/com/kuraki/controller/ConsumerController.class" beforeDir="false" afterPath="$PROJECT_DIR$/../ribbon-consumer/target/classes/com/kuraki/controller/ConsumerController.class" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -97,7 +106,7 @@
       <select />
     </treeState>
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="-7" />
     <option name="y" value="-7" />
     <option name="width" value="1550" />
@@ -240,15 +249,15 @@
       <workItem from="1557477102661" duration="47000" />
       <workItem from="1557752691110" duration="1497000" />
       <workItem from="1557795817665" duration="45000" />
-      <workItem from="1557835971353" duration="1195000" />
+      <workItem from="1557835971353" duration="2306000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="9132000" />
+    <option name="totallyTimeSpent" value="10243000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="7" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.20469083" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
