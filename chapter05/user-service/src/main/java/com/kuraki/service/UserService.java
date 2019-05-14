@@ -1,4 +1,4 @@
-package com.didispace.service;
+package com.kuraki.service;
 
 import com.kuraki.bean.User;
 import com.kuraki.mapper.UserMapper;
@@ -8,7 +8,10 @@ import org.springframework.stereotype.Service;
 @Service
 public class UserService {
 
-    public User getUserById(String userId) {
+    @Autowired
+    private UserMapper userMapper;
 
+    public User getUserById(String userId) {
+        return userMapper.selectByPrimaryKey(userId);
     }
 }

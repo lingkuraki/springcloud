@@ -1,19 +1,21 @@
-package com.didispace.controller;
+package com.kuraki.controller;
 
-import com.didispace.service.UserService;
 import com.kuraki.bean.User;
+import com.kuraki.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.ResponseBody;
 
-@RestController("/user")
+@Controller
+@ResponseBody
 public class UserController {
 
     @Autowired
     private UserService userService;
 
-    @RequestMapping("/{id}")
+    @RequestMapping("/user/{id}")
     public User getUserById(@PathVariable("id")String userId){
         return userService.getUserById(userId);
     }

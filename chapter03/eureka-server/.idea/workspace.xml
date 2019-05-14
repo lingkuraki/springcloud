@@ -2,24 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9d6d1a3e-1afe-41a1-aba8-d43b6facd68a" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/../../chapter02/spring-boot-hello/src/main/java/com/didispace/controller/UserController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../chapter02/spring-boot-hello/src/main/java/com/didispace/mapper/UserMapper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../chapter02/spring-boot-hello/src/main/java/com/didispace/service/UserService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../chapter04/hystrix-consumer/src/main/java/com/kuraki/HystrixApplication.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../chapter04/hystrix-consumer/src/main/java/com/kuraki/bean/User.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../chapter04/hystrix-consumer/src/main/java/com/kuraki/bean/UserCommand.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../chapter04/hystrix-consumer/src/main/java/com/kuraki/bean/UserObservableCommand.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../chapter04/hystrix-consumer/src/main/java/com/kuraki/config/RestTemplateConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../chapter04/hystrix-consumer/src/main/java/com/kuraki/service/UserService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../chapter04/hystrix-consumer/src/main/resources/application.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../chapter02/spring-boot-hello/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../chapter02/spring-boot-hello/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../chapter02/spring-boot-hello/src/main/java/com/didispace/hello/HelloApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../chapter02/spring-boot-hello/src/main/java/com/didispace/HelloApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../chapter02/spring-boot-hello/src/main/java/com/didispace/hello/config/RocketMQHealthIndicator.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../chapter02/spring-boot-hello/src/main/java/com/didispace/config/RocketMQHealthIndicator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../chapter02/spring-boot-hello/src/main/java/com/didispace/hello/web/HelloController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../chapter02/spring-boot-hello/src/main/java/com/didispace/controller/HelloController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../chapter02/spring-boot-hello/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../../chapter02/spring-boot-hello/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../chapter02/spring-boot-hello/src/test/java/com/didispace/hello/HelloApplicationTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../chapter02/spring-boot-hello/src/test/java/com/didispace/HelloApplicationTests.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../chapter05/user-service/src/main/java/com/kuraki/UserApplication.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../chapter05/user-service/src/main/java/com/kuraki/controller/UserController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../chapter05/user-service/src/main/java/com/kuraki/mapper/UserMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../chapter05/user-service/src/main/java/com/kuraki/service/UserService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../chapter05/user-service/src/main/resources/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../chapter02/spring-boot-hello/src/main/java/com/didispace/controller/UserController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../chapter02/spring-boot-hello/src/main/java/com/didispace/mapper/UserMapper.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../chapter02/spring-boot-hello/src/main/java/com/didispace/service/UserService.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ribbon-consumer/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../ribbon-consumer/.idea/workspace.xml" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -121,6 +112,7 @@
     </navigator>
     <panes>
       <pane id="PackagesPane" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -165,7 +157,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -250,16 +241,17 @@
       <workItem from="1557752691110" duration="1497000" />
       <workItem from="1557795817665" duration="45000" />
       <workItem from="1557835971353" duration="2306000" />
+      <workItem from="1557847370989" duration="614000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="10243000" />
+    <option name="totallyTimeSpent" value="10857000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.20469083" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.16204691" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="Image Layers" order="3" />
@@ -302,12 +294,12 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/main/resources/application-peer2.yml" />
     <entry file="file://$PROJECT_DIR$/pom.xml">
-      <provider editor-type-id="MavenHelperPluginDependencyAnalyzer" />
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="527">
           <caret line="31" column="29" selection-start-line="31" selection-start-column="29" selection-end-line="31" selection-end-column="29" />
         </state>
       </provider>
+      <provider editor-type-id="MavenHelperPluginDependencyAnalyzer" />
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/application-peer1.properties">
       <provider selected="true" editor-type-id="text-editor">
