@@ -1,7 +1,6 @@
 package com.kuraki.service;
 
 import com.kuraki.bean.User;
-import com.kuraki.bean.UserObservableCommand;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import com.netflix.hystrix.contrib.javanica.annotation.ObservableExecutionMode;
 import com.netflix.hystrix.contrib.javanica.command.AsyncResult;
@@ -21,7 +20,7 @@ public class UserService {
     // 同步执行
     @HystrixCommand
     public User getUserById(Long id) {
-        return restTemplate.getForObject("http://user-service/users/{1}", User.class, id);
+        return restTemplate.getForObject("http://localhost:8090/users/{1}", User.class, id);
     }
 
     // 异步执行
@@ -30,7 +29,7 @@ public class UserService {
         return new AsyncResult<User>() {
             @Override
             public User invoke() {
-                return restTemplate.getForObject("http://user-service/users/{1}", User.class, id);
+                return restTemplate.getForObject("http://localhost:8090/users/{1}", User.class, id);
             }
         };
     }

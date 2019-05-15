@@ -1,2 +1,16 @@
 server:
   port: 9020
+spring:
+  application:
+    name: hystrix-consumer
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:1111/eureka/
+
+hystrix:
+  command:
+    default:
+      execution:
+        timeout:
+          enabled: false

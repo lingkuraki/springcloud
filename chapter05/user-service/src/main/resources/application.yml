@@ -1,20 +1,25 @@
 server:
   port: 8090
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:1111/eureka
+
 spring:
   application:
     name: user-service
   datasource:
-    driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/springcloudstudy
+    url: jdbc:mysql://127.0.0.1:3306/springcloudstudy?serverTimezone=UTC&useUnicode=true&characterEncoding=utf-8
     username: root
     password: 1234
-
+#    driver-class-name: com.mysql.jdbc.Driver
+  main:
+    allow-bean-definition-overriding: true # 当遇到同样名字的时候，是否允许覆盖注册
 mybatis:
-  type-aliases-package: com.kuraki.bean
+  type-aliases-package: com.kuraki.pojo
   configuration:
     map-underscore-to-camel-case: true
-mapper:
-  mappers: com.kuraki.mapper
-  identity: mysql
-
-
+logging:
+  level:
+    com.kuraki.mapper: debug

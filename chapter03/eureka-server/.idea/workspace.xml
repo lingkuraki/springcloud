@@ -2,15 +2,17 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9d6d1a3e-1afe-41a1-aba8-d43b6facd68a" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/../../chapter05/user-service/src/main/java/com/kuraki/UserApplication.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../chapter05/user-service/src/main/java/com/kuraki/controller/UserController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../chapter05/user-service/src/main/java/com/kuraki/mapper/UserMapper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../chapter05/user-service/src/main/java/com/kuraki/service/UserService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../chapter05/user-service/src/main/resources/application.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../chapter02/spring-boot-hello/src/main/java/com/didispace/controller/UserController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../chapter02/spring-boot-hello/src/main/java/com/didispace/mapper/UserMapper.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../chapter02/spring-boot-hello/src/main/java/com/didispace/service/UserService.java" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../chapter05/hystrix-consumer/src/main/java/com/kuraki/controller/ConsumerController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../chapter05/hystrix-consumer/src/main/java/com/kuraki/bean/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../chapter05/hystrix-consumer/src/main/java/com/kuraki/bean/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../chapter05/hystrix-consumer/src/main/java/com/kuraki/config/RestTemplateConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../chapter05/hystrix-consumer/src/main/java/com/kuraki/config/RestTemplateConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../chapter05/hystrix-consumer/src/main/java/com/kuraki/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../chapter05/hystrix-consumer/src/main/java/com/kuraki/service/UserService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../chapter05/hystrix-consumer/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/../../chapter05/hystrix-consumer/src/main/resources/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../chapter05/user-service/src/main/java/com/kuraki/UserApplication.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../chapter05/user-service/src/main/java/com/kuraki/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../chapter05/user-service/src/main/java/com/kuraki/controller/UserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../chapter05/user-service/src/main/java/com/kuraki/mapper/UserMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../chapter05/user-service/src/main/java/com/kuraki/mapper/UserMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../chapter05/user-service/src/main/java/com/kuraki/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../chapter05/user-service/src/main/java/com/kuraki/service/UserService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../chapter05/user-service/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/../../chapter05/user-service/src/main/resources/application.yml" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -22,16 +24,25 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/kuraki/Application.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret column="19" selection-start-column="19" selection-end-column="19" />
+            <state relative-caret-position="247">
+              <caret line="13" selection-start-line="13" selection-end-line="13" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#345#346#0" expanded="true" />
                 <element signature="e#428#429#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/resources/application.yml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="190">
+              <caret line="10" column="31" selection-start-line="10" selection-start-column="31" selection-end-line="10" selection-end-column="31" />
             </state>
           </provider>
         </entry>
@@ -112,7 +123,6 @@
     </navigator>
     <panes>
       <pane id="PackagesPane" />
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -157,6 +167,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -169,7 +180,7 @@
     <property name="RequestMappingsPanelWidth2" value="75" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1557412867055" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1557930031130" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../../chapter02/spring-boot-hello" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
@@ -242,16 +253,18 @@
       <workItem from="1557795817665" duration="45000" />
       <workItem from="1557835971353" duration="2306000" />
       <workItem from="1557847370989" duration="614000" />
+      <workItem from="1557881837638" duration="103000" />
+      <workItem from="1557922091437" duration="2164000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="10857000" />
+    <option name="totallyTimeSpent" value="13124000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.16204691" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.1652452" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="Image Layers" order="3" />
@@ -274,7 +287,7 @@
       <window_info anchor="bottom" id="Java Enterprise" order="12" />
       <window_info anchor="bottom" id="Database Changes" order="13" />
       <window_info anchor="bottom" id="Version Control" order="14" />
-      <window_info anchor="bottom" id="Run Dashboard" order="15" weight="0.32814237" />
+      <window_info active="true" anchor="bottom" id="Run Dashboard" order="15" visible="true" weight="0.32739422" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -315,13 +328,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/application.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="190">
-          <caret line="10" column="31" selection-start-line="10" selection-start-column="31" selection-end-line="10" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/cloud/spring-cloud-commons/1.1.1.RELEASE/spring-cloud-commons-1.1.1.RELEASE-sources.jar!/org/springframework/cloud/client/discovery/DiscoveryClient.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="114">
@@ -338,13 +344,20 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/kuraki/Application.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="19" selection-start-column="19" selection-end-column="19" />
+        <state relative-caret-position="247">
+          <caret line="13" selection-start-line="13" selection-end-line="13" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#345#346#0" expanded="true" />
             <element signature="e#428#429#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/application.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="190">
+          <caret line="10" column="31" selection-start-line="10" selection-start-column="31" selection-end-line="10" selection-end-column="31" />
         </state>
       </provider>
     </entry>

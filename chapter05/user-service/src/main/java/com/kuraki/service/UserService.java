@@ -11,7 +11,7 @@ public class UserService {
     @Autowired
     private UserMapper userMapper;
 
-    public User getUserById(String userId) {
-        return userMapper.selectByPrimaryKey(userId);
+    public User getUserById(Long userId) {
+        return userMapper.getUserById(userId);
     }
 }

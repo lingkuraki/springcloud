@@ -1,14 +1,15 @@
 package com.kuraki;
 
 import org.springframework.boot.SpringApplication;
-import org.springframework.cloud.client.SpringCloudApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 import tk.mybatis.spring.annotation.MapperScan;
 
-@SpringCloudApplication
+@SpringBootApplication
 @MapperScan("com.kuraki.mapper")
-public class UserApplication {
+public class UserServiceApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(UserApplication.class, args);
+        SpringApplication.run(UserServiceApplication.class, args);
     }
+
 }
