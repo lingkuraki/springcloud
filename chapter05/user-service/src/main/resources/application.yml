@@ -5,6 +5,8 @@ eureka:
   client:
     service-url:
       defaultZone: http://localhost:1111/eureka
+  instance:
+    prefer-ip-address: true
 
 spring:
   application:
@@ -13,9 +15,9 @@ spring:
     url: jdbc:mysql://127.0.0.1:3306/springcloudstudy?serverTimezone=UTC&useUnicode=true&characterEncoding=utf-8
     username: root
     password: 1234
-#    driver-class-name: com.mysql.jdbc.Driver
+  #    driver-class-name: com.mysql.jdbc.Driver
   main:
-    allow-bean-definition-overriding: true # 当遇到同样名字的时候，是否允许覆盖注册
+    allow-bean-definition-overriding: true # 褰撻亣鍒板悓鏍峰悕瀛楃殑鏃跺�欙紝鏄惁鍏佽瑕嗙洊娉ㄥ唽
 mybatis:
   type-aliases-package: com.kuraki.pojo
   configuration:
