@@ -2,17 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9d6d1a3e-1afe-41a1-aba8-d43b6facd68a" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/../../chapter05/hystrix-consumer/src/main/java/com/kuraki/controller/ConsumerController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../chapter05/hystrix-dashboard/src/main/java/com/kuraki/DashboardApplication.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../chapter05/hystrix-dashboard/src/main/resources/application.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../chapter05/springcloud-turbine/src/main/java/com/kuraki/TurbineApplication.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../chapter05/springcloud-turbine/src/main/resources/application.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../chapter05/hystrix-consumer/src/main/java/com/kuraki/bean/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../chapter05/hystrix-consumer/src/main/java/com/kuraki/bean/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../chapter05/hystrix-consumer/src/main/java/com/kuraki/config/RestTemplateConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../chapter05/hystrix-consumer/src/main/java/com/kuraki/config/RestTemplateConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../chapter05/hystrix-consumer/src/main/java/com/kuraki/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../chapter05/hystrix-consumer/src/main/java/com/kuraki/service/UserService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../chapter05/hystrix-consumer/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/../../chapter05/hystrix-consumer/src/main/resources/application.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../chapter05/user-service/src/main/java/com/kuraki/UserApplication.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../chapter05/user-service/src/main/java/com/kuraki/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../chapter05/user-service/src/main/java/com/kuraki/controller/UserController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../chapter05/user-service/src/main/java/com/kuraki/mapper/UserMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../chapter05/user-service/src/main/java/com/kuraki/mapper/UserMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../chapter05/user-service/src/main/java/com/kuraki/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../chapter05/user-service/src/main/java/com/kuraki/service/UserService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../chapter05/user-service/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/../../chapter05/user-service/src/main/resources/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ribbon-consumer/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../ribbon-consumer/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../chapter05/hystrix-consumer/src/main/java/com/kuraki/HystrixApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../chapter05/hystrix-consumer/src/main/java/com/kuraki/HystrixApplication.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -27,7 +23,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/kuraki/Application.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="247">
+            <state relative-caret-position="171">
               <caret line="13" selection-start-line="13" selection-end-line="13" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -108,7 +104,7 @@
       <select />
     </treeState>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds" extendedState="7">
     <option name="x" value="-7" />
     <option name="y" value="-7" />
     <option name="width" value="1550" />
@@ -123,6 +119,7 @@
     </navigator>
     <panes>
       <pane id="PackagesPane" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -167,7 +164,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -180,7 +176,7 @@
     <property name="RequestMappingsPanelWidth2" value="75" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1557930031130" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1558232457389" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../../chapter02/spring-boot-hello" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
@@ -255,16 +251,17 @@
       <workItem from="1557847370989" duration="614000" />
       <workItem from="1557881837638" duration="103000" />
       <workItem from="1557922091437" duration="2164000" />
+      <workItem from="1558230250303" duration="605000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="13124000" />
+    <option name="totallyTimeSpent" value="13729000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="7" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.1652452" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.16684435" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="Image Layers" order="3" />
@@ -307,12 +304,12 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/main/resources/application-peer2.yml" />
     <entry file="file://$PROJECT_DIR$/pom.xml">
+      <provider editor-type-id="MavenHelperPluginDependencyAnalyzer" />
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="527">
           <caret line="31" column="29" selection-start-line="31" selection-start-column="29" selection-end-line="31" selection-end-column="29" />
         </state>
       </provider>
-      <provider editor-type-id="MavenHelperPluginDependencyAnalyzer" />
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/application-peer1.properties">
       <provider selected="true" editor-type-id="text-editor">
@@ -344,7 +341,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/kuraki/Application.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="247">
+        <state relative-caret-position="171">
           <caret line="13" selection-start-line="13" selection-end-line="13" />
           <folding>
             <element signature="imports" expanded="true" />

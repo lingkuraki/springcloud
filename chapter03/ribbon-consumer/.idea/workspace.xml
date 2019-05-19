@@ -2,24 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="510572b1-7f32-4fe4-8300-cf9ddf4cce9a" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/../../chapter02/spring-boot-hello/src/main/java/com/didispace/controller/UserController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../chapter02/spring-boot-hello/src/main/java/com/didispace/mapper/UserMapper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../chapter02/spring-boot-hello/src/main/java/com/didispace/service/UserService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../chapter04/hystrix-consumer/src/main/java/com/kuraki/HystrixApplication.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../chapter04/hystrix-consumer/src/main/java/com/kuraki/bean/User.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../chapter04/hystrix-consumer/src/main/java/com/kuraki/bean/UserCommand.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../chapter04/hystrix-consumer/src/main/java/com/kuraki/bean/UserObservableCommand.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../chapter04/hystrix-consumer/src/main/java/com/kuraki/config/RestTemplateConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../chapter04/hystrix-consumer/src/main/java/com/kuraki/service/UserService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../chapter04/hystrix-consumer/src/main/resources/application.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../chapter02/spring-boot-hello/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../chapter02/spring-boot-hello/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../chapter02/spring-boot-hello/src/main/java/com/didispace/hello/HelloApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../chapter02/spring-boot-hello/src/main/java/com/didispace/HelloApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../chapter02/spring-boot-hello/src/main/java/com/didispace/hello/config/RocketMQHealthIndicator.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../chapter02/spring-boot-hello/src/main/java/com/didispace/config/RocketMQHealthIndicator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../chapter02/spring-boot-hello/src/main/java/com/didispace/hello/web/HelloController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../chapter02/spring-boot-hello/src/main/java/com/didispace/controller/HelloController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../chapter02/spring-boot-hello/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../../chapter02/spring-boot-hello/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../chapter02/spring-boot-hello/src/test/java/com/didispace/hello/HelloApplicationTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../chapter02/spring-boot-hello/src/test/java/com/didispace/HelloApplicationTests.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../chapter05/hystrix-dashboard/src/main/java/com/kuraki/DashboardApplication.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../chapter05/hystrix-dashboard/src/main/resources/application.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../chapter05/springcloud-turbine/src/main/java/com/kuraki/TurbineApplication.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../chapter05/springcloud-turbine/src/main/resources/application.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../eureka-server/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../eureka-server/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../chapter05/hystrix-consumer/src/main/java/com/kuraki/HystrixApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../chapter05/hystrix-consumer/src/main/java/com/kuraki/HystrixApplication.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -40,11 +28,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/kuraki/ConsumerApplication.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="190">
-              <caret line="10" selection-start-line="10" selection-end-line="11" selection-end-column="22" />
+            <state relative-caret-position="209">
+              <caret line="11" column="22" lean-forward="true" selection-start-line="11" selection-start-column="22" selection-end-line="11" selection-end-column="22" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -55,7 +43,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/kuraki/controller/ConsumerController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="171">
+            <state relative-caret-position="95">
               <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -66,7 +54,7 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/kuraki/service/HelloService.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="285">
@@ -116,7 +104,7 @@
       </MavenGeneralSettings>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="-7" />
     <option name="y" value="-7" />
     <option name="width" value="1550" />
@@ -131,7 +119,6 @@
     </navigator>
     <panes>
       <pane id="PackagesPane" />
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -194,6 +181,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -206,7 +194,7 @@
     <property name="RequestMappingsPanelWidth2" value="75" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1557763239591" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1558232457521" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="settings.editor.selected.configurable" value="Settings.JavaScript" />
@@ -258,17 +246,17 @@
       <workItem from="1557450020680" duration="179000" />
       <workItem from="1557752705407" duration="1947000" />
       <workItem from="1557836573632" duration="3211000" />
+      <workItem from="1558232337540" duration="436000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="6549000" />
+    <option name="totallyTimeSpent" value="6985000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="7" />
-    <editor active="true" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.15351813" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.123667374" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="Image Layers" order="3" />
@@ -278,7 +266,7 @@
       <window_info id="Web" order="7" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.32850778" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.32850778" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -417,19 +405,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/kuraki/ConsumerApplication.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="190">
-          <caret line="10" selection-start-line="10" selection-end-line="11" selection-end-column="22" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/kuraki/controller/ConsumerController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="171">
+        <state relative-caret-position="95">
           <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
           <folding>
             <element signature="imports" expanded="true" />
@@ -443,6 +421,16 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="285">
           <caret line="15" column="49" selection-start-line="15" selection-start-column="49" selection-end-line="15" selection-end-column="62" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/kuraki/ConsumerApplication.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="209">
+          <caret line="11" column="22" lean-forward="true" selection-start-line="11" selection-start-column="22" selection-end-line="11" selection-end-column="22" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
