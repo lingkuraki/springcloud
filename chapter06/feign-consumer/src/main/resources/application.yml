@@ -11,3 +11,6 @@ eureka:
       defaultZone: http://localhost:1111/eureka/
   instance:
     prefer-ip-address: true
+logging:
+  level:
+    com.kuraki.service.HelloService: debug

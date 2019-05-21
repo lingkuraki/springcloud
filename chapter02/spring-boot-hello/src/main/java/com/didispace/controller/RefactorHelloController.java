@@ -1,7 +1,7 @@
 package com.didispace.controller;
 
-import com.kuraki.dto.User;
-import com.kuraki.service.HelloService;
+import com.kuraki.feign.dto.User;
+import com.kuraki.feign.service.HelloService;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestParam;
