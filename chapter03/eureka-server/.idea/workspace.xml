@@ -2,15 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9d6d1a3e-1afe-41a1-aba8-d43b6facd68a" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/../../chapter06/feign-consumer/src/main/java/com/kuraki/config/LoggerFeignConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../chapter06/feign-consumer/src/main/java/com/kuraki/service/HelloServiceFallback.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../chapter02/spring-boot-hello/src/main/java/com/didispace/controller/RefactorHelloController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../chapter02/spring-boot-hello/src/main/java/com/didispace/controller/RefactorHelloController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../chapter07/api-gateway/src/main/java/com/kuraki/zuul/ZuulApplication.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../chapter07/api-gateway/src/main/java/com/kuraki/zuul/config/ZuulConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../chapter07/api-gateway/src/main/java/com/kuraki/zuul/controller/HelloController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../chapter07/api-gateway/src/main/java/com/kuraki/zuul/filter/AccessFilter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../chapter07/api-gateway/src/main/resources/application.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../ribbon-consumer/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../ribbon-consumer/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../chapter06/feign-consumer/src/main/java/com/kuraki/controller/CustomerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../chapter06/feign-consumer/src/main/java/com/kuraki/controller/CustomerController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../chapter06/feign-consumer/src/main/java/com/kuraki/service/HelloService1.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../chapter06/feign-consumer/src/main/java/com/kuraki/service/HelloService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../chapter06/feign-consumer/src/main/java/com/kuraki/service/RefactorHelloService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../chapter06/feign-consumer/src/main/java/com/kuraki/service/RefactorHelloService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../chapter06/feign-consumer/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/../../chapter06/feign-consumer/src/main/resources/application.yml" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -106,8 +104,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -152,6 +148,8 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -242,17 +240,19 @@
       <workItem from="1558230250303" duration="9559000" />
       <workItem from="1558355293694" duration="3750000" />
       <workItem from="1558402075006" duration="6000" />
+      <workItem from="1558488244067" duration="90000" />
+      <workItem from="1558516949940" duration="72000" />
+      <workItem from="1558527898721" duration="1160000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="26439000" />
+    <option name="totallyTimeSpent" value="29102000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="7" />
-    <editor active="true" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.13646056" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.141258" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="Image Layers" order="3" />
