@@ -12,7 +12,7 @@ zuul:
     feign-consumer:
       path: /api-b/**
       url: forward:/local
-#      serviceId: feign-cousumer
+#      serviceId: feign-consumer
 
 hello-service:
   ribbon:

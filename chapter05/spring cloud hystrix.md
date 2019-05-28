@@ -5,6 +5,8 @@
 
 ## 原理分析
 
+###工作流程
+
 ![](E:\studySelf\image\hystrix流程图.png)
 
 > 1.创建`HystrixCommand`或`HystrixObservableCommand`对象
@@ -89,7 +91,304 @@ public Future<R> queue() {
   3. `observer():`正常返回`Observable`对象，当订阅它时，将立即通过调用订阅者的`OnError`方法来通知中止请求。
   4. `toObservable():`正常返回`Observable`对象，当订阅它时，将通过调用订阅者的`OnError`方法来通知中止请求。
 
+> 9.返回成功的响应
 
+- 当`Hystrix`命令执行成功之后，它会将**处理结果直接返回**或是**以`Observable`的形式返回**。
+
+![](E:\studySelf\image\依赖结果返回流程图.png)
+
+- `toObservable():`返回最原始的`Observable`，必须通过订阅它才会真正触发命令的执行流程。
+- `observe():`在`toObservable()`产生原始`Observable`之后立即订阅它，让命令能够马上开始异步执行，并返回一个`Observable`对象，当调用它的`subscribe`时，将重新产生结果和通知给订阅者。
+- `queue():`将`toObservable()`产生的原始`Observable`通过`toBlocking()`方法转换成`BlockingObservable`对象，并调用它的`toFuture()`方法返回异步的`Future`对象。
+- `execute():`在`queue()`产生异步结果`Future`对象之后，通过调用`get()`方法阻塞并等待结果的返回。
+
+###断路器原理
+
+- 先看下断路器`HystrixCircuitBreaker`的定义
+
+```java
+public interface HystrixCircuitBreaker {
+
+    // 每个Hystrix命令的请求都通过它判断是否被执行
+    boolean allowRequest();
+
+    // 返回当前断路器是否打开
+    boolean isOpen();
+    
+    // 用来闭合断路器
+    void markSuccess();
+
+    void markNonSuccess();
+
+    boolean attemptExecution();
+    
+    class Factory {...}
+    
+    static class HystrixCircuitBreakerImpl implements HystrixCircuitBreaker {...}
+    
+    static class NoOpCircuitBreaker implements HystrixCircuitBreaker {...}
+}
+```
+
+- 静态类`Factory`中维护了一个`Hystrix`命令与`HystrixCircuitBreaker`的关系集合：
+
+  - `ConcurrentHashMap<String, HystrixCircuitBreaker> circuitBreakersByCommand`，其中`key`通过`HystrixCommandKey`定义，每一个`Hystrix`命令需要有一个`key`来标识，同时一个`Hystrix`命令也会在该集合中找到它对应的断路器`HystrixCircuitBreaker`实例。
+
+- 静态类`NoOpCircuitBreaker`定义了一个什么都不做的断路器实现，它允许所有请求，并且断路器状态始终闭合。
+
+- 静态类`HystrixCircuitBreakerImpl`是断路器接口`HystrixCircuitBreaker`的实现类，在该类中定义了是断路器的`4`种核心对象。
+
+  1. `HystrixCommandProperties properties:`断路器对应`HystrixCommand`实例的属性对象。
+  2. `HystrixCommandMetrics metrics:`用来让`HystrixCommand`记录各类度量指标的对象。
+  3. `AtomicBoolean circuitOpen:`断路器是否打开的标志，默认为`false`。
+  4. `AtomicLong circuitOpenedOrLastTestedTime:`断路器打开或是上一次测试的时间戳。
+
+- 对`HystrixCircuitBreaker`接口的各个方法的实现如下：
+
+  - ```java
+    @Override
+    public boolean isOpen() {
+        if (properties.circuitBreakerForceOpen().get()) {
+            return true;
+        }
+        if (properties.circuitBreakerForceClosed().get()) {
+            return false;
+        }
+        return circuitOpened.get() >= 0;
+    }
+    ```
+
+  - 如果断路器被强制开启，则返回`true`；如果被强制关闭，则返回`false`。如果都没有的话，则返回`circuitOpened`与`0`比较的布尔值。
+
+  - ```java
+    @Override
+    public boolean allowRequest() {
+        // 如果断路器打开，则返回false，拒绝所有请求
+        if (properties.circuitBreakerForceOpen().get()) {
+            return false;
+        }
+        // 如果强制关闭了，则允许所有请求
+        if (properties.circuitBreakerForceClosed().get()) {
+            return true;
+        }
+        if (circuitOpened.get() == -1) {
+            return true;
+        } else {
+            // 判断当前状态是否是搬开状态，是的话，则返回false，允许请求
+            if (status.get().equals(Status.HALF_OPEN)) {
+                return false;
+            } else {
+    		   // 判断断开的时间戳 + cbswMs与当前时间的比较值。false说明允许请求
+                return isAfterSleepWindow();
+            }
+        }
+    }   
+    
+    private boolean isAfterSleepWindow() {
+        final long circuitOpenTime = circuitOpened.get();
+        final long currentTime = System.currentTimeMillis();
+        final long sleepWindowTime= properties.circuitBreakerSleepWindowInMilliseconds().get();
+        return currentTime > circuitOpenTime + sleepWindowTime;
+    }
+    ```
+
+  - `isAfterSleepWindow`方法，通过`circuitBreakerSleepWindowInMilliseconds`属性设置了一个断路器打开之后的休眠时间`(默认5秒)`，在该休眠时间到达之后，将再次允许请求尝试访问。此时断路器处于**半开**状态。若此时请求继续失败，断路器有进入打开状态，并继续等待下一个休眠窗口过去之后再次尝试；若请求成功，则将断路器重新置于关闭状态。
+
+  - `markSuccess():`在**半开路**状态时使用。若`Hystrix`命令调用成功，通过调用它将打开的断路器关闭，并重置度量指标对象。
+
+  ```java
+  @Override
+  public void markSuccess() {
+      if (status.compareAndSet(Status.HALF_OPEN, Status.CLOSED)) {
+          // 重置度量指标对象
+          metrics.resetStream();
+          Subscription previousSubscription = activeSubscription.get();
+          if (previousSubscription != null) {
+              previousSubscription.unsubscribe();
+          }
+          Subscription newSubscription = subscribeToStream();
+          activeSubscription.set(newSubscription);
+          circuitOpened.set(-1L);
+      }
+  }
+  ```
+
+![](E:\studySelf\image\Hystrix执行逻辑.jpg)
+
+### 依赖隔离
+
+- `Hystrix`使用**舱壁模式**实现线程池的隔离，它会为每一个依赖服务创建一个独立的线程池，这样就算某个依赖服务出现延迟过高的情况，也只是对该依赖服务的调用产生影响，而不会拖慢它的依赖服务。通过实现对依赖服务的线程池隔离，可以带来如下优势：
+  1. **应用自身得到完全保护，不会受不可控的依赖服务影响**。
+  2. **可以有效降低接入新服务的风险**。因为即使新服务接入后运行不稳定，也不会影响其它的请求。
+  3. **当依赖的服务从失效恢复正常后，它的线程池会被清理并且能够马上恢复健康的服务**。
+  4. 当依赖的服务出现配置错误，线程池会快速反映出此问题。同时，可以动态刷新属性。
+  5. 当依赖的服务因实现机制调整等原因造成其性能出现很大变化时，线程池的监控指标信息会反映出这样的变化。
+- 通过对依赖服务实现线程池隔离，可让应用更加健壮，不会因为个别依赖服务出现问题而引起非相关服务的异常。
+
+## 使用详解
+
+### 创建请求命令
+
+- 通过继承的方式实现，如下：
+
+```java
+public class UserCommand extends HystrixCommand<User> {
+
+    private RestTemplate restTemplate;
+
+    private Long id;
+
+    public UserCommand() {
+        super(Setter.withGroupKey(HystrixCommandGroupKey.Factory.asKey("CommandGroupKey"))
+                .andCommandKey(HystrixCommandKey.Factory.asKey("CommandKey"))
+                .andThreadPoolKey(HystrixThreadPoolKey.Factory.asKey("ThreadPoolKey")));
+    }
+
+    public UserCommand(Setter setter, RestTemplate restTemplate, Long id) {
+        super(setter);
+        this.restTemplate = restTemplate;
+        this.id = id;
+    }
+
+    @Override
+    protected User run() throws Exception {
+        return restTemplate.getForObject("http://user-service/users/{1}", User.class, id);
+    }
+
+    @Override // 重写该方法，开启缓存
+    protected String getCacheKey() {
+        return String.valueOf(id);
+    }
+}
+```
+
+- 既可以实现**同步请求**，也可以实现**异步请求**：
+  - 同步请求：`User u = new UserCommand(restTemplate, 1L).execute();`
+  - 异步请求：`Future<User> futureUser = new UserCommand(restTemplatem, 1L).queue();`
+
+- 另外，就是使用`@HystrixCommand`注解来实现`Hystrix`命令的定义：
+
+```java
+@Service
+public class UserService {
+
+    @Autowired
+    private RestTemplate restTemplate;
+
+    // 同步执行
+    @HystrixCommand(commandKey = "getUserById", groupKey = "UserGroup", threadPoolKey = "getUserByIdThread")
+    public User getUserById(Long id) {
+        return restTemplate.getForObject("http://user-service/users/{1}", User.class, id);
+    }
+
+    // 异步执行
+    @HystrixCommand
+    public Future<User> getUserByIdAsyn(final Long id) {
+        return new AsyncResult<User>() {
+            @Override
+            public User invoke() {
+                return restTemplate.getForObject("http://user-service/users/{1}", User.class, id);
+            }
+        };
+    }
+}
+```
+
+- 除此之外，也可以将`HystrixCommand`通过`Observable`来实现响应式执行方式。
+  - 通过调用`observe()`和`toObservable()`方法可以返回`Observable`对象。**该对象只能发布一次数据**。
+
+```java
+Observable<String> ho = new UserCommand(restTemplate, 1L).observae();
+Observable<String> co = new UserCommand(restTemplate, 1L).toObservable();
+```
+
+- `Hystrix`提供了另外一个特殊命令封装`HystrixObservableCommand`，通过它实现的命令可以发射多次的`Observable`
+
+```java
+public class UserObservableCommand extends HystrixObservableCommand<User> {
+
+    private RestTemplate restTemplate;
+
+    private Long id;
+
+    public UserObservableCommand(Setter setter, RestTemplate restTemplate, Long id) {
+        super(setter);
+        this.restTemplate = restTemplate;
+        this.id = id;
+    }
+
+    @Override
+    protected Observable<User> construct() {
+        return Observable.create(observer -> {
+            try {
+                if (!observer.isUnsubscribed()) {
+                    User user = restTemplate.getForObject("http://user-service/user/{1}", User.class, id);
+                    observer.onNext(user);
+                    observer.onCompleted();
+                }
+            } catch (Exception e) {
+                observer.onError(e);
+            }
+        });
+    }
+}
+```
+
+- 对应的注解开发如下：
+
+```java
+@HystrixCommand(observableExecutionMode = ObservableExecutionMode.EAGER)
+public Observable<User> getUserByIdObserval(Long id) {
+    return Observable.create(observer -> {
+        try {
+            if (!observer.isUnsubscribed()) {
+                User user = restTemplate.getForObject("http://user-service/{1}", User.class, id);
+                observer.onNext(user);
+                observer.onCompleted();
+            }
+        } catch (Exception e) {
+            observer.onError(e);
+        }
+    });
+}
+```
+
+- 可以通过`observableExecutionMode`参数来控制是使用`observe()`还是`toObservable()`的执行方式。
+  - `observableExecutionMode = ObservableExecutionMode.EAGER:`表示执行`observe()`方式。
+  - `observableExecutionMode = ObservableExecutionMode.LAZY:`表示使用`toObservable()`执行方式。
+
+### 定义服务降级
+
+- 在`HystrixCommand`中可以通过重载`getFallback()`方法来实现服务降级逻辑，`Hystrix`会在`run()`执行过程中出现错误、超时、线程池拒绝、断路器熔断等情况时，执行`getFallback()`方法内的逻辑。
+
+  ```java
+  @Override
+  protected User getFallback() {
+      return new User();
+  }
+  ```
+
+- 使用注解实现服务降级只需要使用`@HystrixCommand`中的`fallbackMethod`参数来指定具体的服务降级实现方法。
+
+  ```java
+  // 异步执行
+  @HystrixCommand(fallbackMethod = "defaultUser")
+  public Future<User> getUserByIdAsyn(final Long id) {
+      return new AsyncResult<User>() {
+          @Override
+          public User invoke() {
+              return restTemplate.getForObject("http://user-service/users/{1}", User.class, id);
+          }
+      };
+  }
+  public User defaultUser(){
+      return new User();
+  }
+  ```
+
+- 在使用注解来定义服务降级逻辑时，我们需要将具体的`Hystrix`命令与`fallback`实现函数定义在同一个类中，并且`fallbackMethod`的值必须与实现`fallback`方法的名字相同。
+
+### 异常处理
 
 
 

@@ -30,7 +30,7 @@ public class UserService {
     }
 
     // 异步执行
-    @HystrixCommand
+    @HystrixCommand(fallbackMethod = "defaultUser")
     public Future<User> getUserByIdAsyn(final Long id) {
         return new AsyncResult<User>() {
             @Override
@@ -38,6 +38,10 @@ public class UserService {
                 return restTemplate.getForObject("http://localhost:8090/users/{1}", User.class, id);
             }
         };
+    }
+
+    public User defaultUser(){
+        return new User();
     }
 
     @HystrixCommand(observableExecutionMode = ObservableExecutionMode.EAGER)

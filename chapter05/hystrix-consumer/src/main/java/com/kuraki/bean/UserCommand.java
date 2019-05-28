@@ -30,6 +30,11 @@ public class UserCommand extends HystrixCommand<User> {
         return restTemplate.getForObject("http://user-service/users/{1}", User.class, id);
     }
 
+    @Override
+    protected User getFallback() {
+        return new User();
+    }
+
     @Override // 重写该方法，开启缓存
     protected String getCacheKey() {
         return String.valueOf(id);
