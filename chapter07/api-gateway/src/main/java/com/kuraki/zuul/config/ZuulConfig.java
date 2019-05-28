@@ -1,6 +1,7 @@
 package com.kuraki.zuul.config;
 
 import com.kuraki.zuul.filter.AccessFilter;
+import org.springframework.boot.autoconfigure.web.DefaultErrorAttributes;
 import org.springframework.cloud.netflix.zuul.filters.discovery.PatternServiceRouteMapper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -19,5 +20,10 @@ public class ZuulConfig {
                 "(?<name>^.+)-(?<version>v.+$)",
                 "#{version}/${name}"
         );
+    }
+
+    @Bean
+    public DefaultErrorAttributes errorAttributes(){
+        return new DidiErrorAttributes();
     }
 }
