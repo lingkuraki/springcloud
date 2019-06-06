@@ -2,8 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9d6d1a3e-1afe-41a1-aba8-d43b6facd68a" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/../../chapter09/config-client-eureka-rabbit/src/main/java/com/kuraki/config/ConfigClientApplication.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../chapter09/config-client-eureka-rabbit/src/main/java/com/kuraki/config/web/TestController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../chapter09/config-server-eureka-rabbitmq/src/main/java/com/kuraki/config/ConfigServerApplication.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../chapter09/rabbitmq-hello/src/main/java/com/kuraki/bus/BusApplication.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../chapter09/rabbitmq-hello/src/main/java/com/kuraki/bus/rabbitmq/RabbitConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../chapter09/rabbitmq-hello/src/main/java/com/kuraki/bus/rabbitmq/Receiver.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../chapter09/rabbitmq-hello/src/main/java/com/kuraki/bus/rabbitmq/Sender.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../chapter09/rabbitmq-hello/src/test/java/com/kuraki/rabbitmq/HelloApplicationTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/kuraki/Application.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../chapter05/spring cloud hystrix.md" beforeDir="false" afterPath="$PROJECT_DIR$/../../chapter05/spring cloud hystrix.md" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -19,7 +27,7 @@
         <entry file="file://$PROJECT_DIR$/src/main/resources/application.yml">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="323">
-              <caret line="17" lean-forward="true" selection-start-line="17" selection-end-line="17" />
+              <caret line="17" selection-start-line="17" selection-end-line="17" />
             </state>
           </provider>
         </entry>
@@ -99,6 +107,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -143,8 +153,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -158,7 +166,7 @@
     <property name="RequestMappingsPanelWidth2" value="75" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1559524332007" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1559815724067" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../../chapter02/spring-boot-hello" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
@@ -183,14 +191,6 @@
     <option name="contentProportion" value="0.12824675" />
   </component>
   <component name="RunManager">
-    <configuration name="Application" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
-      <module name="eureka-server" />
-      <option name="SPRING_BOOT_MAIN_CLASS" value="com.kuraki.Application" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="EurekaApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
       <module name="eureka-server" />
       <extension name="coverage">
@@ -241,17 +241,18 @@
       <workItem from="1558575541854" duration="31000" />
       <workItem from="1558965254266" duration="614000" />
       <workItem from="1559457988659" duration="1821000" />
+      <workItem from="1559743467473" duration="696000" />
+      <workItem from="1559806562118" duration="1995000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="31568000" />
+    <option name="totallyTimeSpent" value="34259000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.14605543" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.14925373" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="Image Layers" order="3" />
@@ -294,12 +295,12 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/main/resources/application-peer2.yml" />
     <entry file="file://$PROJECT_DIR$/pom.xml">
+      <provider editor-type-id="MavenHelperPluginDependencyAnalyzer" />
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="527">
           <caret line="31" column="29" selection-start-line="31" selection-start-column="29" selection-end-line="31" selection-end-column="29" />
         </state>
       </provider>
-      <provider editor-type-id="MavenHelperPluginDependencyAnalyzer" />
     </entry>
     <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/cloud/spring-cloud-commons/1.1.1.RELEASE/spring-cloud-commons-1.1.1.RELEASE-sources.jar!/org/springframework/cloud/client/discovery/DiscoveryClient.java">
       <provider selected="true" editor-type-id="text-editor">
@@ -552,7 +553,7 @@
     <entry file="file://$PROJECT_DIR$/src/main/resources/application.yml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="323">
-          <caret line="17" lean-forward="true" selection-start-line="17" selection-end-line="17" />
+          <caret line="17" selection-start-line="17" selection-end-line="17" />
         </state>
       </provider>
     </entry>

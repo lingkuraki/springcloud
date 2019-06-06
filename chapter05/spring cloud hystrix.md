@@ -390,11 +390,101 @@ public Observable<User> getUserByIdObserval(Long id) {
 
 ### 异常处理
 
+> 异常传播
 
+- 在`HystrixCommand`实现的`run()`方法中抛出异常时，除了`HystrixBadRequestException`之外，其它异常均会被`Hystrix`认为命令执行失败并触发服务器降级的处理逻辑。
+- `@HystrixCommand`注解的`ignoreExceptions`参数支持忽略指定异常类型。被其指定的异常即使抛出也不会触发后续的`fallback`逻辑。
 
+> 异常获取
 
+- 传统方式：可以用`getFallback()`方法通过`Throwable getExecutionException()`方法来获取具体的异常。
+- 注解方式：只需要在`fallback`实现方法的参数中增加`Throwable e`对象的定义，就可以在方法内部获取触发服务降级的具体异常内容。
 
+```java
+@HystrixCommand(fallbackMethod = "fallback1")
+User getUserById(String id) {
+    throw new RuntimeException("getUserById command failed");
+}
 
+User fallback1(String id, Throwable e) {
+    assert "getUserById command failed".equals(e.getMessage());
+}
+```
+
+###命令名称、分组以及线程池划分
+
+```java
+public UserCommand() {
+    super(Setter.withGroupKey(HystrixCommandGroupKey.Factory.asKey("CommandGroupKey"))
+            .andCommandKey(HystrixCommandKey.Factory.asKey("CommandKey")));
+}
+```
+
+- 先调用了`withGroupKey`来设置**命令组名**，然后才通过调用`andCommandKey`来设置**命令名**。
+- 只有`withGroupKey`静态函数可以创建`Setter`的实例，所以`GroupKey`是每一个`Setter`必需的参数，而`CommandKey`则是一个可选参数。
+- `Hystrix`命令默认的线程划分也是根据命令分组来实现的。默认情况下，`Hystrix`会让相同组名的命令使用同一个线程池，所以需要在创建`Hystrix`命令时为其指定命令组名来实现默认的线程池划分。
+
+```java
+public UserCommand() {
+    super(Setter.withGroupKey(HystrixCommandGroupKey.Factory.asKey("CommandGroupKey"))
+            .andCommandKey(HystrixCommandKey.Factory.asKey("CommandKey"))
+            .andThreadPoolKey(HystrixThreadPoolKey.Factory.asKey("ThreadPoolKey")));
+}
+```
+
+- 如果在没有特别指定`HystrixThreadPoolKey`的情况下，依然会使用命令组的方式来划分线程池。通常情况下，尽量通过`HystrixThreadPoolKey`的方式来划分，而不是通过组名的默认方式来实现划分。
+- 在注解开发中，通过设置`@HystrixCommand`注解的`commandKey`、`groupKey`以及`threadPoolKey`属性即可。分别表示命令名称、分组以及线程池划分。
+
+```java
+@HystrixCommand(commandKey = "getUserById", groupKey = "UserGroup", threadPoolKey = "UseThread")
+public User getUserById(Long id) {
+    return restTemplate.getForObject("http://user-service/users/{1}", User.class, id);
+}
+```
+
+###请求缓存
+
+- 在高并发的场景下，`Hystrix`中提供了请求缓存的功能，来方便的优化系统，达到减轻高并发时的请求线程消耗、降低请求响应时间的效果。
+
+>开启请求缓存功能
+
+- 在实现`HystrixCommand`或`HystrixObservableCommand`时，通过重载`getCacheKey()`方法来开启请求缓存。
+
+```java
+public class UserCommand extends HystrixCommand<User> {
+
+    private RestTemplate restTemplate;
+
+    private Long id;
+
+    public UserCommand() {
+        super(Setter.withGroupKey(HystrixCommandGroupKey.Factory.asKey("CommandGroupKey"))
+                .andCommandKey(HystrixCommandKey.Factory.asKey("CommandKey"))
+                .andThreadPoolKey(HystrixThreadPoolKey.Factory.asKey("ThreadPoolKey")));
+    }
+
+    public UserCommand(Setter setter, RestTemplate restTemplate, Long id) {
+        super(setter);
+        this.restTemplate = restTemplate;
+        this.id = id;
+    }
+
+    @Override
+    protected User run() throws Exception {
+        return restTemplate.getForObject("http://user-service/users/{1}", User.class, id);
+    }
+
+    @Override
+    protected User getFallback() {
+        return new User();
+    }
+
+    @Override // 重写该方法，开启缓存
+    protected String getCacheKey() {
+        return String.valueOf(id);
+    }
+}
+```
 
 
 
