@@ -17,5 +17,4 @@ public interface HelloService {
 
     @RequestMapping(value = "/hello6", method = RequestMethod.POST)
     String hello(@RequestParam User user);
-
 }

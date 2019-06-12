@@ -486,6 +486,249 @@ public class UserCommand extends HystrixCommand<User> {
 }
 ```
 
+- `Hystrix`根据`getCacheKey`方法返回的值来区分是否是重复的请求，如果它们的`cacheKey`相同，那么该依赖服务只会在第一个请求到达时真实地调用一次，另外一个请求则是直接从请求缓存中返回结果。所以通过开启请求缓存具备以下三个好处：
+  1. 减少重复的请求数，降低依赖服务的并发度。
+  2. 在同一用户请求的上下文中，相同依赖服务的返回数据始终保持一致。
+  3. 请求缓存在`run()`和`construct()`执行之前生效，所以可以有效减少不必要的线程开销。
+
+> 清理失效缓存功能
+
+- `Hystrix`可以通过`HystrixRequestCache.clear()`方法来进行缓存的清理，如下两个示例类：
+
+```java
+public class UserGetCommand extends HystrixCommand<User> {
+
+    private static final HystrixCommandKey GETTER_KEY = HystrixCommandKey.Factory.asKey("CommandKey");
+    private RestTemplate restTemplate;
+    private Long id;
+
+    public UserGetCommand(RestTemplate restTemplate, Long id) {
+
+        super(Setter.withGroupKey(HystrixCommandGroupKey.Factory.asKey("GetSetGet"))
+              .andCommandKey(GETTER_KEY));
+        this.restTemplate = restTemplate;
+        this.id = id;
+    }
+
+    @Override
+    protected User run() throws Exception {
+        return restTemplate.getForObject("http://user-service/users/{1}", User.class, id);
+    }
+
+    @Override
+    protected String getCacheKey() {
+        // 根据id置入缓存
+        return String.valueOf(id);
+    }
+
+    public static void flushCache(Long id) {
+        // 刷新缓存，根据id进行清理
+        HystrixRequestCache.getInstance(
+            GETTER_KEY, HystrixConcurrencyStrategyDefault.getInstance()).clear(String.valueOf(id));
+    }
+}
+```
+
+```java
+public class UserPostCommand extends HystrixCommand<User> {
+
+    private RestTemplate restTemplate;
+    private User user;
+
+    public UserPostCommand(RestTemplate restTemplate, User user) {
+
+        super(Setter.withGroupKey(HystrixCommandGroupKey.Factory.asKey("GetSetGet")));
+        this.restTemplate = restTemplate;
+        this.user = user;
+    }
+
+    @Override
+    protected User run() throws Exception {
+        // 写操作
+        User user1 = restTemplate.postForObject("http://user-service/users", user, User.class);
+        // 刷新缓存，清理缓存中失效的User
+        UserGetCommand.flushCache(user.getId());
+        return user1;
+    }
+}
+```
+
+- 在`UserGetCommand`的实现中，增加了一个静态方法`flushCache`，该方法通过`HystrixRequestCache.getInstance(GETTER_KEY, HystrixConcurrencyStrategyDefault.getInstance())`方法从默认的`Hystrix`并发策略中根据`GETTER_KEY`获取到改名了的请求缓存对象`HystrixRequestCache`的实例，然后再调用该请求缓存对象实例的`clear`方法，从而进行缓存清理。
+
+> 工作原理
+
+- 首先`getCacheKey`方法来自于`AbstractCommand`抽象命令类实现，该类相关源码如下：
+
+```java
+abstract class AbstractCommand<R> implements HystrixInvokableInfo<R>, HystrixObservable<R> {
+    
+    protected final HystrixRequestCache requestCache;
+    
+	protected String getCacheKey() {
+        return null;
+    }
+    
+    protected boolean isRequestCachingEnabled() {
+        return properties.requestCacheEnabled().get() && getCacheKey() != null;
+    }
+    
+    // 核心分为两步：尝试获取请求缓存以及将请求结果加入缓存
+    public Observable<R> toObservable() {
+        ....
+        // 尝试从缓存中获取结果
+    	final boolean requestCacheEnabled = isRequestCachingEnabled();
+	    final String cacheKey = getCacheKey();
+        final AbstractCommand<R> _cmd = this;
+		/* try from cache first */
+		if (requestCacheEnabled) {
+    	  	HystrixCommandResponseFromCache<R> fromCache = (HystrixCommandResponseFromCache<R>) 			requestCache.get(cacheKey);
+    		if (fromCache != null) {
+        		isResponseFromCache = true;
+        		return handleRequestCacheHitAndEmitValues(fromCache, _cmd);
+    		}
+		}
+        Observable<R> hystrixObservable = Observable.defer(applyHystrixSemantics)
+                .map(wrapWithAllOnNextHooks);
+	    Observable<R> afterCache;
+        ....
+            
+        // 加入缓存
+        if (requestCacheEnabled && cacheKey != null) {
+            // wrap it for caching
+            HystrixCachedObservable<R> toCache = HystrixCachedObservable.
+                									from(hystrixObservable, _cmd);
+            HystrixCommandResponseFromCache<R> fromCache = 
+                (HystrixCommandResponseFromCache<R>) requestCache.putIfAbsent(cacheKey, toCache);
+            if (fromCache != null) {
+                // another thread beat us so we'll use the cached value instead
+                toCache.unsubscribe();
+                isResponseFromCache = true;
+                return handleRequestCacheHitAndEmitValues(fromCache, _cmd);
+            } else {
+                // we just created an ObservableCommand so we cast and return it
+                afterCache = toCache.toObservable();
+            }
+        } else {
+            afterCache = hystrixObservable;
+        }
+	}
+    ....
+}
+```
+
+> **使用注解实现请求缓存**
+
+- 提供了三个专用与请求缓存的注解
+
+| 注解           | 描述                                                         | 属性                           |
+| -------------- | ------------------------------------------------------------ | ------------------------------ |
+| `@CacheResult` | 该注解用来标记请求命令返回的结果应该被缓存，它必须与`@HystrixCommand`注解结合使用。 | `cacheKeyMethod`               |
+| `@CacheRemove` | 该注解用来让请求命令的缓存失效，失效的缓存根据定义的`Key`决定。 | `commandKey`，`cacheKeyMethod` |
+| `@CacheKey`    | 该注解用来在请求命令的参数上标记，使其作为缓存的`Key`值，如果没有标注则会使用所有的参数。**如果同时还使用了`@CacheResult`和`CacheRemove`注解的`cacheKeyMethod`方法指定缓存`Key`的生成，那么该注解将不会起作用**。 | `value`                        |
+
+- **设置请求缓存**：由于该方法被`@CacheResult`注解修饰，所以`Hystrix`会将该结果置入缓存中，而它的缓存`Key`值会使用所有的参数。
+
+```java
+@CacheResult
+@HystrixCommand
+public User getUserById(Long id) {
+    return restTemplate.getForObject("http://user-service/users/{1}", User.class, id);
+}
+```
+
+- **定义缓存`Key`：**有两种方式定义缓存的`key`，具体如下：
+
+```java
+@CacheResult(cacheKeyMethod = "getUserByIdCacheKey")
+@HystrixCommand
+public User getUserById(Long id) {
+    return restTemplate.getForObject("http://user-service/users/{1}", User.class, id);
+}
+
+private Long getUserByIdCacheKey(Long id) {
+    return id;
+}
+```
+
+通过`@CacheKey`注解实现的方式更加简单，它的优先级比`cacheKeyMethod`的优先级低；如果已经使用了`cacheKeyMethod`指定缓存`Key`的生成函数，那么`@CacheKey`注解不会生效。
+
+```java
+@CacheResult
+@HystrixCommand
+public User getUserById(@CacheKey("id") Long id) {
+    return restTemplate.getForObject("http://user-service/users/{1}", User.class, id);
+}
+```
+
+`@CacheKey`注解除了可以指定方法参数作为缓存`Key`之外，它还允许访问参数对象的内部属性作为缓存`Key`：
+
+```java
+@CacheResult
+@HystrixCommand
+public User getUserById(@CacheKey("id") User user) {
+    return restTemplate.getForObject("http://user-service/users/{1}", User.class, user.getId());
+}
+```
+
+- **缓存清理：**通过`@CacheRemove`注解来实现失效缓存的清理
+
+```java
+@CacheResult
+@HystrixCommand
+public User getUserById(@CacheKey("id") Long id) {
+    return restTemplate.getForObject("http://user-service/users/{1}", User.class, id);
+}
+
+@CacheRemove(commandKey = "getUserById")
+@HystrixCommand
+public void update(@CacheKey("id") User user) {
+    return restTemplate.getForObject("http://user-service/users/{1}", user, User.class);
+}
+```
+
+- `@CacheRemove`注解的`commandKey`属性是必须是指定，它用来指明需要使用请求缓存的请求命令。
+
+### 请求合并
+
+- `Hystrix`提供了`HystrixCollapser`来实现请求的合并，以减少通信消耗和线程数的占用。
+
+```java
+public abstract class HystrixCollapser<BatchReturnType, ResponseType, RequestArgumentType> implements HystrixExecutable<ResponseType>, HystrixObservable<ResponseType> {
+    ...
+    // 该函数定义获取请求参数的方法
+    public abstract RequestArgumentType getRequestArgument();
+    
+    // 合并请求产生批量命令的具体实现方法
+    protected abstract HystrixCommand<BatchReturnType> createCommand(
+        Collection<CollapsedRequest<ResponseType, RequestArgumentType>> requests);
+    
+    // 批量命令结果返回后的处理，需要实现将批量结果拆分并传递给合并前的各个原子请求命令的逻辑
+    protected abstract void mapResponseToRequests(BatchReturnType batchResponse, Collection<CollapsedRequest<ResponseType, RequestArgumentType>> requests);
+}
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

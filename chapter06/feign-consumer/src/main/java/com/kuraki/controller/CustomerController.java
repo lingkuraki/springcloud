@@ -1,6 +1,5 @@
 package com.kuraki.controller;
 
-
 import com.kuraki.entity.User;
 import com.kuraki.service.HelloService;
 import com.kuraki.service.RefactorHelloService;
